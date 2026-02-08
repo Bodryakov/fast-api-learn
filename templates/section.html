@@ -1,0 +1,31 @@
+﻿<!-- Назначение файла: страница конкретного раздела с карточками уроков. -->
+{% extends 'base.html' %}
+
+{% block title %}Раздел {{ section.number }}{% endblock %}
+
+{% block content %}
+<nav class="breadcrumbs">
+    <a href="/">Разделы</a>
+    <span>/</span>
+    <span>Раздел-{{ section.number }}-{{ section.title }}</span>
+</nav>
+
+<section class="section-page">
+    <h1 class="page-title">Раздел-{{ section.number }}-{{ section.title }}</h1>
+
+    <div class="grid cards">
+        {% for lesson in lessons %}
+        <article class="card lesson-card">
+            <header class="card-header">
+                <a class="card-title" href="/section-{{ section.number }}-{{ section.slug }}/lesson-{{ lesson.number }}-{{ lesson.slug }}">
+                    Урок-{{ lesson.number }}-{{ lesson.title }}
+                </a>
+            </header>
+            <div class="card-body">
+                <p>Материал урока, тесты и задачи.</p>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

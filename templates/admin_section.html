@@ -1,0 +1,37 @@
+﻿<!-- Назначение файла: создание/редактирование раздела. -->
+{% extends 'base.html' %}
+
+{% block title %}{% if section %}Редактировать раздел{% else %}Новый раздел{% endif %}{% endblock %}
+
+{% block content %}
+<section class="admin-form-page">
+    <div class="admin-header">
+        <h1 class="page-title">{% if section %}Редактировать раздел{% else %}Новый раздел{% endif %}</h1>
+        <a class="btn" href="/bod/dashboard">Назад</a>
+    </div>
+
+    {% if error %}
+    <div class="alert error">{{ error }}</div>
+    {% endif %}
+
+    <form class="form admin-form" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+        <label>
+            Номер
+            <input type="number" name="number" value="{{ section.number if section else '' }}" required />
+        </label>
+        <label>
+            Заголовок
+            <input type="text" name="title" value="{{ section.title if section else '' }}" required />
+        </label>
+        <label>
+            Slug
+            <input type="text" name="slug" value="{{ section.slug if section else '' }}" pattern="[a-z]+(-[a-z]+)*" required />
+        </label>
+        <div class="form-actions">
+            <a class="btn" href="/bod/dashboard">Отмена</a>
+            <button class="btn primary" type="submit">Сохранить</button>
+        </div>
+    </form>
+</section>
+{% endblock %}

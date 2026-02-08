@@ -1,0 +1,82 @@
+﻿<!-- Назначение файла: дашборд админ-панели с разделами и уроками. -->
+{% extends 'base.html' %}
+
+{% block title %}Админ-панель{% endblock %}
+
+{% block content %}
+<section class="admin-dashboard">
+    <div class="admin-header">
+        <h1 class="page-title">Админ-панель</h1>
+        <form method="post" action="/bod/logout">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+            <button class="btn" type="submit">Выход</button>
+        </form>
+    </div>
+
+    {% if error %}
+    <div class="alert error">{{ error }}</div>
+    {% endif %}
+
+    <div class="dashboard-actions">
+        <a class="btn primary" href="/bod/section/create">Добавить раздел</a>
+    </div>
+
+    {% if sections %}
+    <div class="sections-board">
+        {% for section in sections %}
+        <article class="section-card">
+            <div class="section-header">
+                <div class="section-title">
+                    <h2>Раздел {{ section.number }}: {{ section.title }}</h2>
+                    <div class="section-slug">slug: {{ section.slug }}</div>
+                </div>
+                <div class="section-actions">
+                    <a class="btn" href="/bod/section/edit/{{ section.id }}">Редактировать</a>
+                    <form method="post" action="/bod/section/delete/{{ section.id }}">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+                        <button class="btn danger" type="submit">Удалить</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="section-lessons">
+                <div class="block-header">
+                    <h3>Уроки</h3>
+                    <a class="btn" href="/bod/lesson/create?section_id={{ section.id }}">Добавить урок</a>
+                </div>
+
+                <div class="lessons-list">
+                    {% set section_lessons = lessons_by_section.get(section.id, []) %}
+                    {% if section_lessons %}
+                        {% for lesson in section_lessons %}
+                        <div class="lesson-card">
+                            <div class="lesson-info">
+                                <div class="lesson-name">Урок {{ lesson.number }}: {{ lesson.title }}</div>
+                                {% if lesson.status == 'published' %}
+                                <div class="status-badge published">Опубликован</div>
+                                {% else %}
+                                <div class="status-badge draft">Черновик</div>
+                                {% endif %}
+                            </div>
+                            <div class="lesson-actions">
+                                <a class="btn" href="/bod/lesson/edit/{{ lesson.id }}">Редактировать</a>
+                                <form method="post" action="/bod/lesson/delete/{{ lesson.id }}">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+                                    <button class="btn danger" type="submit">Удалить</button>
+                                </form>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="empty-state">В этом разделе пока нет уроков.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="empty-state">Разделов пока нет.</p>
+    {% endif %}
+</section>
+{% endblock %}

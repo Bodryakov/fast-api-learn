@@ -1,0 +1,53 @@
+﻿<!-- Назначение файла: базовый HTML-шаблон, общая структура страниц, header, подключение стилей и скриптов. -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- Базовые мета-настройки. -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token | default('') }}" />
+
+    <!-- Заголовок страницы. -->
+    <title>{% block title %}Fast-API-Learn{% endblock %}</title>
+
+    <!-- Подключение Google Fonts (современный шрифт). -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Подключение иконок Material. -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Rounded" rel="stylesheet" />
+
+    <!-- Подключение Prism.js для подсветки кода. -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet" />
+
+    <!-- Подключение основных стилей. -->
+    <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+    <!-- Минимальный header. -->
+    <header class="site-header">
+        <div class="brand">Fast-API-Learn</div>
+        <div class="header-actions">
+            <button class="theme-toggle" id="themeToggle" title="Сменить тему">Тема</button>
+        </div>
+    </header>
+
+    <!-- Основной контент страницы. -->
+    <main class="page">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Подключение скриптов. -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-markup.min.js"></script>
+
+    <!-- Основной скрипт. -->
+    <script src="/static/js/app.js"></script>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

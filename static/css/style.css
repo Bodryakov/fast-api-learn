@@ -1,0 +1,619 @@
+﻿/* Назначение файла: глобальные стили, темы, сетки, карточки, админка, адаптивность. */
+
+:root {
+    --font-main: 'Manrope', system-ui, sans-serif;
+    --bg: #f6f8fb;
+    --bg-2: #eef2f7;
+    --surface: #ffffff;
+    --text: #1d2630;
+    --muted: #5b6b7b;
+    --primary: #1f6feb;
+    --primary-2: #0ea5e9;
+    --danger: #ef4444;
+    --ok: #16a34a;
+    --border: #d7e1ee;
+    --shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    --radius: 14px;
+}
+
+[data-theme="dark"] {
+    --bg: #0b1220;
+    --bg-2: #101b2e;
+    --surface: #111827;
+    --text: #e5e7eb;
+    --muted: #94a3b8;
+    --primary: #60a5fa;
+    --primary-2: #38bdf8;
+    --danger: #f87171;
+    --ok: #4ade80;
+    --border: #1f2937;
+    --shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-main);
+    background: radial-gradient(1200px 400px at 0% 0%, var(--bg-2), var(--bg));
+    color: var(--text);
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.site-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 8px 24px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.brand {
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+.header-actions {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 8px;
+}
+
+.theme-toggle {
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.page {
+    padding: 24px;
+}
+
+.page-title {
+    margin: 0 0 20px 0;
+}
+
+.grid.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 16px;
+}
+
+.card-header {
+    margin-bottom: 12px;
+}
+
+.card-title {
+    font-weight: 600;
+    color: var(--text);
+}
+
+.lesson-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 8px;
+}
+
+.breadcrumbs {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 16px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.lesson-page .lesson-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.lesson-theory img,
+.task-text img {
+    max-width: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+}
+
+.tests .test-question {
+    padding: 12px;
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+.test-title {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 0 0 8px;
+    font-weight: 600;
+}
+
+.test-number {
+    color: var(--muted);
+}
+
+.test-question-text {
+    flex: 1;
+    font-weight: 500;
+}
+
+.test-options {
+    display: grid;
+    gap: 8px;
+}
+
+.test-option {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.test-option.correct {
+    border-color: var(--ok);
+    color: var(--ok);
+}
+
+.test-option.correct::after {
+    content: ' ✓';
+    color: var(--ok);
+}
+
+.test-option.wrong {
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
+.test-option.wrong::after {
+    content: ' ✗';
+    color: var(--danger);
+}
+
+.lesson-nav .nav-grid {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 8px;
+    justify-content: start;
+}
+
+.btn {
+    display: inline-grid;
+    place-items: center;
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+}
+
+.btn.primary {
+    background: color-mix(in oklab, var(--primary) 20%, var(--surface));
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.btn.danger {
+    background: color-mix(in oklab, var(--danger) 15%, var(--surface));
+    border-color: var(--danger);
+    color: var(--danger);
+}
+
+.alert {
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+.alert.error {
+    background: color-mix(in oklab, var(--danger) 10%, var(--surface));
+    color: var(--danger);
+    border: 1px solid var(--danger);
+}
+
+.form {
+    display: grid;
+    gap: 12px;
+}
+
+.form label {
+    display: grid;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.form input,
+.form select {
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--text);
+}
+
+.admin-dashboard {
+    display: grid;
+    gap: 16px;
+}
+
+.dashboard-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.admin-form-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    gap: 16px;
+}
+
+.admin-form {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+}
+
+.section-actions form,
+.lesson-actions form {
+    margin: 0;
+}
+
+.admin-content {
+    display: grid;
+    gap: 16px;
+}
+
+.admin-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+}
+
+.sections-board {
+    display: grid;
+    gap: 16px;
+}
+
+.section-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    display: grid;
+    gap: 12px;
+    box-shadow: var(--shadow);
+}
+
+.section-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: start;
+}
+
+.section-title h2 {
+    margin: 0;
+}
+
+.section-slug {
+    margin-top: 4px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.section-actions {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 8px;
+}
+
+.section-edit-form {
+    background: var(--bg-2);
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+    padding: 12px;
+}
+
+.section-lessons {
+    display: grid;
+    gap: 10px;
+}
+
+.lesson-card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: start;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg-2);
+}
+.lesson-card.active {
+    border-color: var(--primary);
+}
+
+.lesson-info {
+    display: grid;
+    gap: 6px;
+}
+
+.lesson-name {
+    font-weight: 600;
+}
+
+.status-badge {
+    width: fit-content;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+}
+
+.status-badge.published {
+    color: var(--ok);
+    border-color: var(--ok);
+    background: color-mix(in oklab, var(--ok) 12%, var(--surface));
+}
+
+.status-badge.draft {
+    color: var(--muted);
+}
+
+.lesson-actions {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 8px;
+}
+
+.lesson-editor {
+    display: grid;
+    gap: 12px;
+}
+
+.lesson-editor.is-hidden {
+    display: none;
+}
+
+.lesson-editor-host {
+    margin-top: 12px;
+}
+
+.lesson-panels {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 1fr;
+}
+
+.lesson-panel {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px;
+    display: grid;
+    gap: 8px;
+}
+
+.lesson-panel h3 {
+    margin: 0;
+}
+
+.lesson-editor-storage {
+    display: none;
+}
+
+.admin-panel .admin-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 16px;
+}
+
+.admin-sidebar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px;
+}
+
+.sections-list,
+.lessons-list {
+    display: grid;
+    gap: 8px;
+}
+
+.sidebar-header,
+.block-header,
+.admin-header {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.icon-btn {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 4px 8px;
+}
+
+.section-item,
+.lesson-item {
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg-2);
+    cursor: pointer;
+}
+
+.section-item.active,
+.lesson-item.active {
+    border-color: var(--primary);
+}
+
+.editor {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    padding: 10px;
+    min-height: 160px;
+}
+
+.editor-toolbar {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 6px;
+    margin-bottom: 8px;
+    overflow-x: auto;
+}
+
+.editor-toolbar button,
+.editor-toolbar select {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: 6px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.test-editor {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 12px;
+    display: grid;
+    gap: 8px;
+}
+
+.test-editor .test-question-block {
+    display: grid;
+    gap: 6px;
+}
+
+.test-editor .test-question-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.test-editor .test-toolbar {
+    background: var(--bg-2);
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.test-editor .option-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 6px;
+    align-items: center;
+}
+
+.test-editor .option-input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--text);
+}
+
+.test-editor .option-row input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+}
+
+.test-editor .options-grid {
+    display: grid;
+    gap: 6px;
+}
+
+.not-found {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+}
+
+/* Базовые стили для мобильных устройств (от 320px)
+   Всё, что ниже 600px, описывается здесь без медиа-запроса */
+
+/* Малые устройства (например, крупные смартфоны или маленькие планшеты) */
+@media (width >= 600px) {
+    .page {
+        padding: 32px;
+    }
+}
+
+/* Средние устройства (планшеты в альбомной ориентации) */
+@media (width >= 900px) {
+    .grid.cards {
+        gap: 20px;
+    }
+}
+
+/* Ноутбуки и небольшие десктопы */
+@media (width >= 1200px) {
+    .page {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}
+
+/* Большие мониторы */
+@media (width >= 1600px) {
+    .page {
+        max-width: 1400px;
+    }
+}
+
+/* Сверхширокие мониторы (Full HD и выше) */
+@media (width >= 1920px) {
+    .page {
+        max-width: 1600px;
+    }
+}

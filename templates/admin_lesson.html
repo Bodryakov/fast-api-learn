@@ -1,0 +1,84 @@
+﻿<!-- Назначение файла: создание/редактирование урока. -->
+{% extends 'base.html' %}
+
+{% block title %}{% if lesson %}Редактировать урок{% else %}Новый урок{% endif %}{% endblock %}
+
+{% block content %}
+<section class="admin-form-page">
+    <div class="admin-header">
+        <h1 class="page-title">{% if lesson %}Редактировать урок{% else %}Новый урок{% endif %}</h1>
+        <a class="btn" href="/bod/dashboard">Назад</a>
+    </div>
+
+    {% if error %}
+    <div class="alert error">{{ error }}</div>
+    {% endif %}
+
+    <form class="form admin-form" method="post" id="lessonForm">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}" />
+        <input type="hidden" name="theory_html" id="theoryHtml" />
+        <input type="hidden" name="tests_json" id="testsJson" />
+        <input type="hidden" name="tasks_json" id="tasksJson" />
+
+        <label>
+            Раздел
+            <select name="section_id" required>
+                {% for sec in sections %}
+                <option value="{{ sec.id }}"
+                    {% if (lesson and lesson.section_id == sec.id) or (not lesson and default_section_id and default_section_id == sec.id) %}
+                        selected
+                    {% endif %}>
+                    {{ sec.number }}. {{ sec.title }}
+                </option>
+                {% endfor %}
+            </select>
+        </label>
+        <label>
+            Номер
+            <input type="number" name="number" value="{{ lesson.number if lesson else '' }}" required />
+        </label>
+        <label>
+            Заголовок
+            <input type="text" name="title" value="{{ lesson.title if lesson else '' }}" required />
+        </label>
+        <label>
+            Slug
+            <input type="text" name="slug" value="{{ lesson.slug if lesson else '' }}" pattern="[a-z]+(-[a-z]+)*" required />
+        </label>
+
+        <div class="lesson-panels">
+            <div class="lesson-panel">
+                <h3>Теория</h3>
+                <div class="editor-toolbar" id="theoryToolbar"></div>
+                <div id="theoryEditor" class="editor"></div>
+            </div>
+
+            <div class="lesson-panel">
+                <h3>Тесты</h3>
+                <div id="testsList"></div>
+                <button class="btn" type="button" id="addTest">Добавить вопрос</button>
+            </div>
+
+            <div class="lesson-panel">
+                <h3>Задачи</h3>
+                <div class="editor-toolbar" id="tasksToolbar"></div>
+                <div id="tasksEditor" class="editor"></div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <a class="btn" href="/bod/dashboard">Отмена</a>
+            <button class="btn" type="submit" name="action" value="draft">Сохранить черновик</button>
+            <button class="btn primary" type="submit" name="action" value="publish">Опубликовать</button>
+        </div>
+    </form>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    window.initialLessonData = {{ initial_data | tojson }};
+</script>
+<script src="/static/js/admin.js"></script>
+<script type="module" src="/static/js/tiptap.js"></script>
+{% endblock %}
