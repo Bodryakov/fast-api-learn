@@ -59,9 +59,19 @@ ALLOWED_PROTOCOLS = ['http', 'https', 'mailto']
 
 # Очистка HTML.
 def sanitize_html(html: str) -> str:
+    if not html:
+        return ""
+    
+    # Заменяем ProseMirror-trailingBreak на &nbsp;
+    # Это может приходить из Tiptap редактора
+    html = html.replace('<p><br class="ProseMirror-trailingBreak"></p>', '<p>&nbsp;</p>')
+    html = html.replace('<p><br class="ProseMirror-trailingBreak" /></p>', '<p>&nbsp;</p>')
+    html = html.replace('<p></p>', '<p>&nbsp;</p>')
+    html = html.replace('<p> </p>', '<p>&nbsp;</p>')
+    
     # Очищаем HTML, удаляя опасные теги/атрибуты.
     return bleach.clean(
-        html or '',
+        html,
         tags=ALLOWED_TAGS,
         attributes=ALLOWED_ATTRS,
         protocols=ALLOWED_PROTOCOLS,

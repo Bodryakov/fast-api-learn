@@ -36,6 +36,8 @@
 
 html {
     scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -61,9 +63,14 @@ a:hover {
     padding: 8px 24px;
     background: var(--surface);
     border-bottom: 1px solid var(--border);
-    position: sticky;
+    border-bottom: 1px solid var(--border);
+    position: absolute;
+    /* Force top alignment, but scroll with page */
     top: 0;
-    z-index: 10;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    z-index: 100;
 }
 
 .brand {
@@ -87,7 +94,8 @@ a:hover {
 }
 
 .page {
-    padding: 24px;
+    /* Add top padding to push content below the absolute header */
+    padding-top: 60px;
 }
 
 .page-title {
@@ -126,13 +134,14 @@ a:hover {
 }
 
 .breadcrumbs {
-    display: grid;
-    grid-auto-flow: column;
-    gap: 8px;
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    gap: 8px;
     margin-bottom: 16px;
     color: var(--muted);
     font-size: 14px;
+    width: fit-content;
 }
 
 .lesson-page .lesson-block {
@@ -371,6 +380,7 @@ a:hover {
     border-radius: 12px;
     background: var(--bg-2);
 }
+
 .lesson-card.active {
     border-color: var(--primary);
 }
@@ -507,6 +517,7 @@ a:hover {
 .editor .ProseMirror {
     font-size: 110%;
 }
+
 .editor .ProseMirror p {
     margin: 0.4em 0;
 }
@@ -543,20 +554,24 @@ pre {
     opacity: 0.7;
     transition: all 0.2s ease;
     z-index: 10;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
 .code-copy-btn:hover {
     opacity: 1;
     background: var(--bg-2);
     transform: scale(1.05);
 }
+
 .code-copy-btn.copied {
     border-color: var(--ok);
     color: var(--ok);
 }
+
 .code-copy-btn .material-symbols-rounded {
     font-size: 18px;
 }
+
 /* Убираем чёрную обводку при фокусе внутри редактора */
 .editor:focus,
 .editor:focus-visible,
@@ -682,21 +697,21 @@ code[class*="language-"] {
 }
 
 /* Малые устройства (например, крупные смартфоны или маленькие планшеты) */
-@media (width >= 600px) {
+@media (width >=600px) {
     .page {
-        padding: 32px;
+        padding: 64px 32px 32px 32px;
     }
 }
 
 /* Средние устройства (планшеты в альбомной ориентации) */
-@media (width >= 900px) {
+@media (width >=900px) {
     .grid.cards {
         gap: 20px;
     }
 }
 
 /* Ноутбуки и небольшие десктопы */
-@media (width >= 1200px) {
+@media (width >=1200px) {
     .page {
         max-width: 1200px;
         margin: 0 auto;
@@ -704,14 +719,14 @@ code[class*="language-"] {
 }
 
 /* Большие мониторы */
-@media (width >= 1600px) {
+@media (width >=1600px) {
     .page {
         max-width: 1400px;
     }
 }
 
 /* Сверхширокие мониторы (Full HD и выше) */
-@media (width >= 1920px) {
+@media (width >=1920px) {
     .page {
         max-width: 1600px;
     }

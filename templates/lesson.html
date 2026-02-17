@@ -7,16 +7,16 @@
 <nav class="breadcrumbs">
     <a href="/">Разделы</a>
     <span>/</span>
-    <a href="/section-{{ section.number }}-{{ section.slug }}">Раздел-{{ section.number }}-{{ section.title }}</a>
+    <a href="/section-{{ section.number }}-{{ section.slug }}">Раздел-{{ section.number }}. {{ section.title }}</a>
     <span>/</span>
-    <span>Урок-{{ lesson.number }}-{{ lesson.title }}</span>
+    <span>Урок-{{ lesson.number }}. {{ lesson.title }}</span>
 </nav>
 
 <section class="lesson-page">
-    <h1 class="page-title">Урок-{{ lesson.number }}-{{ lesson.title }}</h1>
+    <h1 class="page-title">Урок-{{ lesson.number }}. {{ lesson.title }}</h1>
 
     <article class="lesson-block">
-        <h2>Теория</h2>
+
         <div class="lesson-theory">
             {{ lesson.content.theory.html | safe }}
         </div>
@@ -54,11 +54,13 @@
     <nav class="lesson-nav">
         <div class="nav-grid">
             {% if prev_lesson %}
-            <a class="btn" href="/section-{{ section.number }}-{{ section.slug }}/lesson-{{ prev_lesson.number }}-{{ prev_lesson.slug }}">Предыдущий</a>
+            <a class="btn"
+                href="/section-{{ section.number }}-{{ section.slug }}/lesson-{{ prev_lesson.number }}-{{ prev_lesson.slug }}">Предыдущий</a>
             {% endif %}
 
             {% if next_lesson %}
-            <a class="btn" href="/section-{{ section.number }}-{{ section.slug }}/lesson-{{ next_lesson.number }}-{{ next_lesson.slug }}">Следующий</a>
+            <a class="btn"
+                href="/section-{{ section.number }}-{{ section.slug }}/lesson-{{ next_lesson.number }}-{{ next_lesson.slug }}">Следующий</a>
             {% endif %}
 
             <a class="btn" href="/section-{{ section.number }}-{{ section.slug }}">В оглавление</a>

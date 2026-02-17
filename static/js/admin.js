@@ -277,7 +277,12 @@ function hydrateEditors() {
 
 lessonForm?.addEventListener('submit', () => {
     if (theoryHtmlEl) {
-        theoryHtmlEl.value = window.tiptapEditors?.theory?.getHTML() || '';
+        let html = window.tiptapEditors?.theory?.getHTML() || '';
+        // Replace ProseMirror-trailingBreak and empty paragraphs with &nbsp;
+        html = html.replace(/<p><br class="ProseMirror-trailingBreak"><\/p>/g, '<p>&nbsp;</p>');
+        html = html.replace(/<p><\/p>/g, '<p>&nbsp;</p>');
+        html = html.replace(/<p> <\/p>/g, '<p>&nbsp;</p>');
+        theoryHtmlEl.value = html;
     }
     if (testsJsonEl) {
         testsJsonEl.value = JSON.stringify(collectTests());

@@ -1,6 +1,7 @@
-﻿<!-- Назначение файла: базовый HTML-шаблон, общая структура страниц, header, подключение стилей и скриптов. -->
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
+<!-- Назначение файла: базовый HTML-шаблон, общая структура страниц, header, подключение стилей и скриптов. -->
 <html lang="ru">
+
 <head>
     <!-- Базовые мета-настройки. -->
     <meta charset="UTF-8" />
@@ -22,10 +23,10 @@
     <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet" />
 
     <!-- Подключение основных стилей. -->
-    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/style.css?v=6" />
 </head>
-<body>
-    <!-- Минимальный header. -->
+
+<body style="margin: 0; padding: 0;">
     <header class="site-header">
         <div class="brand">Fast-API-Learn</div>
         <div class="header-actions">
@@ -50,4 +51,5 @@
 
     {% block scripts %}{% endblock %}
 </body>
+
 </html>
