@@ -1,0 +1,12 @@
+﻿<!-- Назначение файла: страница ошибки 404 с переходом на главную. -->
+{% extends 'base.html' %}
+
+{% block title %}Страница не найдена{% endblock %}
+
+{% block content %}
+<section class="not-found">
+    <h1 class="page-title">404 — Страница не найдена</h1>
+    <p>Похоже, такой страницы нет. Вернитесь на главную.</p>
+    <a class="btn" href="/">На главную</a>
+</section>
+{% endblock %}

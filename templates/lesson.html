@@ -1,0 +1,72 @@
+﻿<!-- Назначение файла: страница урока с теорией, тестами, задачами и навигацией. -->
+{% extends 'base.html' %}
+
+{% block title %}Урок {{ lesson.number }}{% endblock %}
+
+{% block content %}
+<nav class="breadcrumbs">
+    <a href="/">Разделы</a>
+    <span>/</span>
+    <a href="/section-{{ section.number }}-{{ section.slug }}">Раздел-{{ section.number }}-{{ section.title }}</a>
+    <span>/</span>
+    <span>Урок-{{ lesson.number }}-{{ lesson.title }}</span>
+</nav>
+
+<section class="lesson-page">
+    <h1 class="page-title">Урок-{{ lesson.number }}-{{ lesson.title }}</h1>
+
+    <article class="lesson-block">
+        <h2>Теория</h2>
+        <div class="lesson-theory">
+            {{ lesson.content.theory.html | safe }}
+        </div>
+    </article>
+
+    <article class="lesson-block tests" data-lesson-id="{{ lesson.id }}">
+        <h2>Тестирование</h2>
+        {% for test in lesson.content.tests %}
+        <div class="test-question" data-correct="{{ test.correct_index }}">
+            <div class="test-title">
+                <span class="test-number">{{ loop.index }}.</span>
+                <span class="test-question-text">{{ test.question | safe }}</span>
+            </div>
+            <div class="test-options">
+                {% for option in test.options %}
+                <button class="test-option" data-index="{{ loop.index0 }}">{{ option | safe }}</button>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </article>
+
+    <article class="lesson-block tasks">
+        <h2>Задачи</h2>
+        <div class="tasks-list">
+            {% for task in lesson.content.tasks %}
+            <div class="task-item">
+                <h3>{{ task.title }}</h3>
+                <div class="task-text">{{ task.html | safe }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </article>
+
+    <nav class="lesson-nav">
+        <div class="nav-grid">
+            {% if prev_lesson %}
+            <a class="btn" href="/section-{{ section.number }}-{{ section.slug }}/lesson-{{ prev_lesson.number }}-{{ prev_lesson.slug }}">Предыдущий</a>
+            {% endif %}
+
+            {% if next_lesson %}
+            <a class="btn" href="/section-{{ section.number }}-{{ section.slug }}/lesson-{{ next_lesson.number }}-{{ next_lesson.slug }}">Следующий</a>
+            {% endif %}
+
+            <a class="btn" href="/section-{{ section.number }}-{{ section.slug }}">В оглавление</a>
+
+            {% if not next_lesson %}
+            <a class="btn" href="/">На главную</a>
+            {% endif %}
+        </div>
+    </nav>
+</section>
+{% endblock %}

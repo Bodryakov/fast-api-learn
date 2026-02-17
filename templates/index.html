@@ -1,0 +1,35 @@
+﻿<!-- Назначение файла: главная страница со списком разделов и уроков в виде карточек. -->
+{% extends 'base.html' %}
+
+{% block title %}Разделы и уроки{% endblock %}
+
+{% block content %}
+<section class="section-list">
+    <h1 class="page-title">Разделы и уроки</h1>
+
+    <div class="grid cards">
+        {% for section in sections %}
+        <article class="card section-card">
+            <header class="card-header">
+                <a class="card-title" href="/section-{{ section.number }}-{{ section.slug }}">
+                    Раздел-{{ section.number }}-{{ section.title }}
+                </a>
+            </header>
+
+            <div class="card-body">
+                <ul class="lesson-links">
+                    {% set lessons = lessons_by_section.get(section.id, []) %}
+                    {% for lesson in lessons %}
+                    <li>
+                        <a href="/section-{{ section.number }}-{{ section.slug }}/lesson-{{ lesson.number }}-{{ lesson.slug }}">
+                            Урок-{{ lesson.number }}-{{ lesson.title }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
