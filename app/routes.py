@@ -51,7 +51,7 @@ def normalize_tests(raw_tests):
     for test in (raw_tests or []):
         question_html = sanitize_html(test.get('question', '') or '')
         raw_options = test.get('options') or []
-        options = [sanitize_html(opt or '') for opt in raw_options]
+        options = [opt.strip() if opt else '' for opt in raw_options]
         if len(options) < 4:
             options += [''] * (4 - len(options))
         options = options[:4]

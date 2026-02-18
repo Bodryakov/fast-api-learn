@@ -217,6 +217,27 @@ a:hover {
     color: var(--danger);
 }
 
+/* Tasks */
+.tasks-list {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr;
+}
+
+.task-item {
+    padding: 16px;
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    background: color-mix(in oklab, var(--bg-2) 15%, var(--surface));
+}
+
+.task-item h3 {
+    margin: 0 0 12px 0;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
 .lesson-nav .nav-grid {
     display: grid;
     grid-auto-flow: column;
@@ -722,6 +743,28 @@ code[class*="language-"] {
 @media (width >=1600px) {
     .page {
         max-width: 1400px;
+    }
+
+    .lesson-block.tests {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        align-items: start;
+    }
+
+    .lesson-block.tests h2 {
+        grid-column: 1 / -1;
+        margin-top: 0;
+    }
+
+    .lesson-block.tests .test-question {
+        margin-bottom: 0;
+    }
+
+    .tasks-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        align-items: start;
     }
 }
 

@@ -32,7 +32,7 @@
             </div>
             <div class="test-options">
                 {% for option in test.options %}
-                <button class="test-option" data-index="{{ loop.index0 }}">{{ option | safe }}</button>
+                <button class="test-option" data-index="{{ loop.index0 }}">{{ option }}</button>
                 {% endfor %}
             </div>
         </div>

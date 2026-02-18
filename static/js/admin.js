@@ -131,12 +131,6 @@ function addTaskItem(data = null) {
     wrapper.dataset.taskId = taskId;
 
     // Title input
-    const titleLabel = document.createElement('label');
-    titleLabel.textContent = 'Заголовок задачи';
-    titleLabel.style.display = 'block';
-    titleLabel.style.fontWeight = 'bold';
-    titleLabel.style.marginBottom = '0.5rem';
-
     const titleInput = document.createElement('input');
     titleInput.type = 'text';
     titleInput.className = 'task-title-input'; // Add specific class for selection
@@ -145,7 +139,6 @@ function addTaskItem(data = null) {
     titleInput.style.width = '100%';
     titleInput.style.marginBottom = '1rem';
 
-    wrapper.appendChild(titleLabel);
     wrapper.appendChild(titleInput);
 
     // Editor

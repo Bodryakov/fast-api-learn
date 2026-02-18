@@ -75,7 +75,7 @@ def sanitize_html(html: str) -> str:
         tags=ALLOWED_TAGS,
         attributes=ALLOWED_ATTRS,
         protocols=ALLOWED_PROTOCOLS,
-        strip=True,
+        strip=False,
     )
 
 # Проверяем валидность slug.

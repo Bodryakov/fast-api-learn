@@ -134,7 +134,15 @@ function resolveElement(target) {
                     } else {
                         const { from, to } = editor.state.selection;
                         const text = editor.state.doc.textBetween(from, to, '\n');
-                        editor.chain().focus().insertContent(`<pre><code>${text || ' '}</code></pre>`).run();
+                        editor.chain().focus().insertContent({
+                            type: 'codeBlock',
+                            content: [
+                                {
+                                    type: 'text',
+                                    text: text || ' ',
+                                },
+                            ],
+                        }).run();
                     }
                 }
             },
