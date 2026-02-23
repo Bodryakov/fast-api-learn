@@ -35,8 +35,8 @@ from app.rest import sanitize_html, validate_slug
 # Создаём роутер страниц.
 pages_router = APIRouter()
 
-# Регулярка для распознавания секций и уроков вида №-slug (например, 1-vvedenie-v-fastapi).
-DESCRIPTOR_RE = re.compile(r'^(?P<number>\d+)-(?P<slug>[a-z]+(?:-[a-z]+)*)$')
+# Регулярка для распознавания секций и уроков вида №-slug (разрешаем буквы и цифры в slug).
+DESCRIPTOR_RE = re.compile(r'^(?P<number>\d+)-(?P<slug>[a-z0-9]+(?:-[a-z0-9]+)*)$')
 
 
 def parse_descriptor(descriptor: str):
@@ -391,9 +391,9 @@ async def admin_lesson_create(request: Request):
         return templates.TemplateResponse('admin_lesson.html', {
             'request': request,
             'csrf_token': ensure_csrf_token(request),
-            'lesson': None,
+            'lesson': {'number': form.get('number', ''), 'title': title, 'slug': slug, 'section_id': section_id},
             'sections': sections,
-            'default_section_id': form.get('section_id'),
+            'default_section_id': section_id,
             'initial_data': initial_data,
             'error': error,
         }, status_code=400)

@@ -26,7 +26,8 @@
         </label>
         <label>
             Slug
-            <input type="text" name="slug" value="{{ section.slug if section else '' }}" pattern="[a-z]+(-[a-z]+)*" required />
+            <input type="text" name="slug" value="{{ section.slug if section else '' }}"
+                pattern="[a-z0-9]+(-[a-z0-9]+)*" required />
         </label>
         <div class="form-actions">
             <a class="btn" href="/bod/dashboard">Отмена</a>

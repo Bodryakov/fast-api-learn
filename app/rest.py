@@ -34,8 +34,8 @@ from app.admin_auth import require_admin, verify_csrf_token
 # Создаём роутер API.
 api_router = APIRouter(prefix='/api')
 
-# Регулярное выражение для slug.
-SLUG_RE = re.compile(r'^[a-z]+(-[a-z]+)*$')
+# Регулярное выражение для slug (разрешаем буквы и цифры).
+SLUG_RE = re.compile(r'^[a-z0-9]+(-[a-z0-9]+)*$')
 
 # Настройки очистки HTML от XSS.
 ALLOWED_TAGS = [

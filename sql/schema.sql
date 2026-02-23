@@ -25,7 +25,7 @@ create table if not exists public.sections (
 -- Ограничение формата slug для разделов: только строчные латинские буквы и дефисы.
 alter table public.sections
     add constraint sections_slug_format
-    check (slug ~ '^[a-z]+(-[a-z]+)*$');
+    check (slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$');
 
 -- Таблица уроков.
 create table if not exists public.lessons (
@@ -56,7 +56,7 @@ create table if not exists public.lessons (
 -- Ограничение формата slug для уроков: только строчные латинские буквы и дефисы.
 alter table public.lessons
     add constraint lessons_slug_format
-    check (slug ~ '^[a-z]+(-[a-z]+)*$');
+    check (slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$');
 
 -- Ограничение допустимых значений статуса публикации.
 alter table public.lessons
