@@ -152,6 +152,11 @@ a:hover {
     margin-bottom: 16px;
 }
 
+.lesson-theory {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
 .lesson-theory img,
 .task-text img {
     max-width: 100%;
@@ -181,6 +186,7 @@ a:hover {
 .test-question-text {
     flex: 1;
     font-weight: 500;
+    font-size: 1.1em;
 }
 
 .test-options {
@@ -195,6 +201,7 @@ a:hover {
     border-radius: 10px;
     cursor: pointer;
     text-align: left;
+    font-size: 1.2em;
 }
 
 .test-option.correct {
@@ -686,35 +693,51 @@ pre {
 
 /* Базовые стили для мобильных устройств (от 320px)
    Всё, что ниже 600px, описывается здесь без медиа-запроса */
-.lesson-theory pre code,
 .task-text pre code,
 .editor pre code,
 pre code {
-    font-size: 150%;
-    line-height: 1.1;
+    font-size: 135%;
+    line-height: 1.2;
+}
+
+.lesson-theory pre code {
+    font-size: 122.7%;
+    line-height: 1.2;
 }
 
 .editor .ProseMirror code,
-.lesson-theory code,
 .task-text code {
-    font-size: 150%;
-    line-height: 1.1;
+    font-size: 135%;
+    line-height: 1.2;
 }
 
-.lesson-theory pre[class*="language-"],
+.lesson-theory code {
+    font-size: 122.7%;
+    line-height: 1.2;
+}
+
 .task-text pre[class*="language-"],
 .editor pre[class*="language-"],
 pre[class*="language-"] {
-    font-size: 150%;
-    line-height: 1.1;
+    font-size: 135%;
+    line-height: 1.2;
 }
 
-.lesson-theory code[class*="language-"],
+.lesson-theory pre[class*="language-"] {
+    font-size: 122.7%;
+    line-height: 1.2;
+}
+
 .task-text code[class*="language-"],
 .editor code[class*="language-"],
 code[class*="language-"] {
-    font-size: 150%;
-    line-height: 1.1;
+    font-size: 135%;
+    line-height: 1.2;
+}
+
+.lesson-theory code[class*="language-"] {
+    font-size: 122.7%;
+    line-height: 1.2;
 }
 
 /* Малые устройства (например, крупные смартфоны или маленькие планшеты) */
