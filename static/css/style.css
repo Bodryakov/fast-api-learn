@@ -245,6 +245,11 @@ a:hover {
     color: var(--text);
 }
 
+.task-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
 .lesson-nav .nav-grid {
     display: grid;
     grid-auto-flow: column;
